@@ -32,7 +32,7 @@ export const UrgencyNotification: React.FC<UrgencyNotificationProps> = ({
             stiffness: 300,
             duration: 0.4
           }}
-          className="fixed bottom-20 right-6 z-[90]"
+          className="fixed bottom-32 right-6 z-[90]"
         >
           {/* Compact Urgency Button */}
           <div 
