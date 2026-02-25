@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrquestraPH - Automated Revenue Engine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: { brand: { 500: '#3b82f6', 600: '#2563eb' } }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass-nav { 
+            background: rgba(255,255,255,0.7); 
+            backdrop-filter: blur(16px); 
+            border-bottom: 1px solid rgba(226,232,240,0.5); 
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05); 
+            padding-top: 0.75rem; 
+            padding-bottom: 0.75rem; 
+        }
+        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body class="bg-white text-slate-900 antialiased">
+
+<!-- Navbar -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 py-4 bg-transparent">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+            <img src="https://i.postimg.cc/hGvyPKfc/Purple-Modern-Artificial-Intelligence-Logo.png" alt="Logo" class="w-14 h-14 rounded-lg object-cover shadow-sm">
+            <span id="logo-text" class="text-xl font-bold text-white tracking-tighter transition-colors duration-300">Orquestra<span class="text-indigo-500">PH</span></span>
+        </div>
+        <div class="hidden lg:flex items-center gap-8">
+            <a href="#" onclick="window.scrollTo(0,0); return false;" class="text-white hover:text-slate-200 font-medium text-sm transition-colors" id="nav-home">Home</a>
+            <a href="#reality" class="text-white hover:text-slate-200 font-medium text-sm transition-colors" id="nav-reality">The Reality</a>
+            <a href="#system" class="text-white hover:text-slate-200 font-medium text-sm transition-colors" id="nav-system">The Solution</a>
+            <a href="#process" class="text-white hover:text-slate-200 font-medium text-sm transition-colors" id="nav-process">Process</a>
+            <a href="#testimonials" class="text-white hover:text-slate-200 font-medium text-sm transition-colors" id="nav-testimonials">Testimonials</a>
+            <a href="#audit-form" class="text-white hover:text-slate-200 font-medium text-sm transition-colors" id="nav-audit">Claim Free Audit</a>
+            <a href="#discovery" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition shadow-[0_0_20px_rgba(37,99,235,0.3)]">Book Discovery Call</a>
+        </div>
+        <!-- Mobile Menu Button -->
+        <button class="lg:hidden text-white" onclick="toggleMobileMenu()">
+            <i data-lucide="menu" class="w-6 h-6" id="menu-icon"></i>
+            <i data-lucide="x" class="w-6 h-6 hidden" id="close-icon"></i>
+        </button>
+    </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="lg:hidden fixed top-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-lg border-b border-slate-200/50 shadow-lg -translate-y-full transition-transform duration-300">
+    <div class="px-6 py-4">
+        <div class="flex justify-between items-center mb-6">
+            <div class="flex items-center gap-2">
+                <img src="https://i.postimg.cc/hGvyPKfc/Purple-Modern-Artificial-Intelligence-Logo.png" alt="Logo" class="w-10 h-10 rounded-lg object-cover">
+                <span class="text-lg font-bold text-slate-900 tracking-tighter">Orquestra<span class="text-indigo-500">PH</span></span>
+            </div>
+            <button class="text-slate-900" onclick="toggleMobileMenu()">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+        <div class="flex flex-col gap-4">
+            <a href="#" onclick="window.scrollTo(0,0); toggleMobileMenu(); return false;" class="text-slate-600 text-lg font-medium hover:text-slate-900 transition-colors">Home</a>
+            <a href="#reality" onclick="toggleMobileMenu()" class="text-slate-600 text-lg font-medium hover:text-slate-900 transition-colors">The Reality</a>
+            <a href="#system" onclick="toggleMobileMenu()" class="text-slate-600 text-lg font-medium hover:text-slate-900 transition-colors">The Solution</a>
+            <a href="#process" onclick="toggleMobileMenu()" class="text-slate-600 text-lg font-medium hover:text-slate-900 transition-colors">Process</a>
+            <a href="#testimonials" onclick="toggleMobileMenu()" class="text-slate-600 text-lg font-medium hover:text-slate-900 transition-colors">Testimonials</a>
+            <a href="#audit-form" onclick="toggleMobileMenu()" class="text-slate-600 text-lg font-medium hover:text-slate-900 transition-colors">Claim Free Audit</a>
+            <a href="#discovery" onclick="toggleMobileMenu()" class="bg-blue-600 text-white px-6 py-3 rounded-lg text-base font-medium hover:bg-blue-700 transition shadow-[0_0_20px_rgba(37,99,235,0.3)] text-center">Book Discovery Call</a>
+        </div>
+    </div>
+</div>
+
+<!-- Hero -->
+<section class="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden px-6">
+    <div class="max-w-5xl mx-auto text-center relative z-10 fade-in">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-sm font-medium mb-8">
+            <i data-lucide="zap" class="w-4 h-4"></i>
+            <span>Stop losing leads to manual follow-ups</span>
+        </div>
+        <h1 class="text-5xl md:text-7xl font-bold text-slate-900 tracking-tight mb-8 leading-tight">
+            We Build <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Automated Revenue Engines</span> For Service Businesses.
+        </h1>
+        <p class="text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+            <span class="text-red-600 font-semibold">You're busy, but you're not</span> making more money. We install AI-driven systems that capture, nurture, and close leads while you sleep.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="#audit-form" class="w-full sm:w-auto bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-bold hover:bg-blue-700 transition shadow-[0_0_20px_rgba(37,99,235,0.3)]">
+                Claim Your Free System Audit
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- The Reality -->
+<section id="reality" class="scroll-mt-24 py-24 bg-white px-6">
+    <div class="max-w-7xl mx-auto fade-in">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-5xl font-bold text-slate-900 mb-6">The Reality</h2>
+            <p class="text-lg text-slate-600 max-w-2xl mx-auto">Most businesses treat their sales process like a hobby, not a system. If your revenue depends on you manually checking messages every 10 minutes, you don't have a business—you have a high-stress job.</p>
+        </div>
+    </div>
+</section>
+
+<!-- System -->
+<section id="system" class="scroll-mt-24 py-24 bg-slate-50 px-6 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto fade-in">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-5xl font-bold text-slate-900 mb-6">The Automated Revenue Engine</h2>
+            <p class="text-lg text-slate-600 max-w-2xl mx-auto">A complete ecosystem designed to turn strangers into paying clients with zero manual effort.</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- Card 1 -->
+            <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl transition-all">
+                <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-6 text-blue-600">
+                    <i data-lucide="magnet"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 mb-3">1. Lead Capture</h3>
+                <p class="text-slate-600">We build high-converting landing pages and forms that seamlessly sync with your CRM.</p>
+            </div>
+            <!-- Card 2 -->
+            <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl transition-all">
+                <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mb-6 text-indigo-600">
+                    <i data-lucide="bot"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 mb-3">2. AI Nurture</h3>
+                <p class="text-slate-600">Automated SMS and email sequences that engage leads instantly and follow up relentlessly.</p>
+            </div>
+            <!-- Card 3 -->
+            <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl transition-all">
+                <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-6 text-purple-600">
+                    <i data-lucide="calendar-check"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 mb-3">3. Auto-Booking</h3>
+                <p class="text-slate-600">Qualified leads book directly onto your calendar. You just show up and close the deal.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Process -->
+<section id="process" class="scroll-mt-24 py-24 bg-white px-6">
+    <div class="max-w-7xl mx-auto fade-in">
+        <div class="grid lg:grid-cols-2 gap-20 items-center">
+            <div>
+                <h2 class="text-3xl md:text-5xl font-bold text-slate-900 mb-6">How We Work</h2>
+                <p class="text-lg text-slate-600 mb-12">We don't just give you software. We build, install, and optimize the entire system for you.</p>
+                <div class="space-y-8">
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold shrink-0">1</div>
+                        <div>
+                            <h4 class="text-xl font-bold text-slate-900 mb-2">Discovery & Audit</h4>
+                            <p class="text-slate-600">We map out your current process and identify the exact bottlenecks costing you money.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold shrink-0">2</div>
+                        <div>
+                            <h4 class="text-xl font-bold text-slate-900 mb-2">System Architecture</h4>
+                            <p class="text-slate-600">We custom-build your CRM, pipelines, and automation workflows in GoHighLevel.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold shrink-0">3</div>
+                        <div>
+                            <h4 class="text-xl font-bold text-slate-900 mb-2">Launch & Scale</h4>
+                            <p class="text-slate-600">We flip the switch, monitor the data, and optimize the system for maximum conversion.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-slate-50 rounded-3xl p-8 border border-slate-200">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2426&ixlib=rb-4.0.3" alt="Dashboard" class="rounded-xl shadow-lg w-full">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section id="testimonials" class="scroll-mt-24 py-24 bg-white px-6">
+    <div class="max-w-7xl mx-auto fade-in">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-5xl font-bold text-slate-900 mb-6">Testimonials</h2>
+            <p class="text-lg text-slate-600 max-w-2xl mx-auto">Real Systems. Real Revenue.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Audit Form -->
+<section id="audit-form" class="scroll-mt-24 py-24 bg-slate-50 px-6">
+    <div class="max-w-3xl mx-auto fade-in">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-5xl font-bold text-slate-900 mb-4">Claim Your Free Audit</h2>
+            <p class="text-slate-500">Tell us about your business. We'll show you exactly where you're leaking revenue.</p>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-3xl p-8 md:p-12 shadow-xl">
+            <!-- Replace this with your GoHighLevel Form Embed Code -->
+            <div class="text-center p-10 border-2 border-dashed border-slate-300 rounded-xl">
+                <p class="text-slate-500 font-medium mb-4">Embed your GoHighLevel form here</p>
+                <code class="bg-slate-100 text-slate-800 px-4 py-2 rounded text-sm">&lt;iframe src="YOUR_GHL_FORM_URL" ...&gt;&lt;/iframe&gt;</code>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Discovery CTA -->
+<section id="discovery" class="scroll-mt-24 py-20 px-6 bg-blue-600 relative overflow-hidden">
+    <div class="max-w-4xl mx-auto text-center relative z-10 fade-in">
+        <h2 class="text-3xl md:text-5xl font-bold text-white tracking-tight mb-8">
+            Ready to Automate Your Business?
+        </h2>
+        <a href="#audit-form" class="inline-block bg-white text-blue-600 px-10 py-6 rounded-lg text-lg font-bold hover:bg-slate-100 transition shadow-xl">
+            Book a Discovery Call
+        </a>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-12 bg-white border-t border-slate-200 px-6">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+        <div class="flex items-center gap-2">
+            <img src="https://i.postimg.cc/hGvyPKfc/Purple-Modern-Artificial-Intelligence-Logo.png" alt="Logo" class="w-10 h-10 rounded object-cover shadow-sm">
+            <span class="text-lg font-bold text-slate-900 tracking-tighter">Orquestra<span class="text-indigo-500">PH</span></span>
+        </div>
+        <div class="flex gap-8 text-slate-500 text-sm">
+            <a href="#" class="hover:text-slate-900">Privacy Policy</a>
+            <a href="#" class="hover:text-slate-900">Terms of Service</a>
+        </div>
+        <p class="text-slate-400 text-xs font-mono">© 2026 OrquestraPH. ALL RIGHTS RESERVED.</p>
+    </div>
+</footer>
+
+<!-- WhatsApp Popup -->
+<div class="fixed bottom-6 right-6 z-50">
+    <a href="https://wa.me/09638296973?text=Hello!%20I'm%20interested%20in%20learning%20more%20about%20OrquestraPH." target="_blank" class="w-16 h-16 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-[0_8px_30px_rgba(37,211,102,0.4)] hover:shadow-[0_8px_40px_rgba(37,211,102,0.6)] transition-all hover:scale-105">
+        <i data-lucide="message-circle" class="w-8 h-8"></i>
+    </a>
+</div>
+
+<script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+    
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('navbar');
+        const logoText = document.getElementById('logo-text');
+        const navLinks = ['nav-home', 'nav-reality', 'nav-system', 'nav-process', 'nav-testimonials', 'nav-audit'];
+        
+        if (window.scrollY > 20) {
+            nav.classList.add('glass-nav');
+            nav.classList.remove('bg-transparent', 'py-4');
+            logoText.classList.remove('text-white');
+            logoText.classList.add('text-slate-900');
+            navLinks.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.classList.remove('text-white', 'hover:text-slate-200');
+                    el.classList.add('text-slate-600', 'hover:text-slate-900');
+                }
+            });
+        } else {
+            nav.classList.remove('glass-nav');
+            nav.classList.add('bg-transparent', 'py-4');
+            logoText.classList.remove('text-slate-900');
+            logoText.classList.add('text-white');
+            navLinks.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.classList.remove('text-slate-600', 'hover:text-slate-900');
+                    el.classList.add('text-white', 'hover:text-slate-200');
+                }
+            });
+        }
+    });
+
+    // Intersection Observer for fade-in animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
+        
+        if (mobileMenu.classList.contains('-translate-y-full')) {
+            // Open menu
+            mobileMenu.classList.remove('-translate-y-full');
+            mobileMenu.classList.add('translate-y-0');
+            menuIcon.classList.add('hidden');
+            closeIcon.classList.remove('hidden');
+        } else {
+            // Close menu
+            mobileMenu.classList.add('-translate-y-full');
+            mobileMenu.classList.remove('translate-y-0');
+            menuIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+        }
+    }
+</script>
+</body>
+</html>
