@@ -16,26 +16,12 @@ export default function App() {
   const [showUrgencyNotification, setShowUrgencyNotification] = useState(false);
 
   useEffect(() => {
-    // Check if popup was already shown in the last 24 hours
-    const lastShown = localStorage.getItem('timePopupLastShown');
-    const now = Date.now();
-    const twentyFourHours = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-
-    console.log('Last shown:', lastShown);
-    console.log('Time since last shown:', lastShown ? (now - parseInt(lastShown)) / 1000 / 60 / 60 : 'Never');
-
-    if (lastShown && (now - parseInt(lastShown)) < twentyFourHours) {
-      console.log('Popup shown recently - skipping');
-      return; // Don't show popup if it was shown within last 24 hours
-    }
-
-    // Set timer to show popup after 15 seconds (15,000 milliseconds)
-    console.log('Setting 15-second timer for popup...');
+    // Set timer to show popup after 20 seconds for every visitor
+    console.log('Setting 20-second timer for popup...');
     const timer = setTimeout(() => {
-      console.log('15 seconds elapsed - showing popup');
+      console.log('20 seconds elapsed - showing popup');
       setShowTimePopup(true);
-      localStorage.setItem('timePopupLastShown', Date.now().toString());
-    }, 15000); // 15 seconds
+    }, 20000); // 20 seconds
 
     return () => clearTimeout(timer);
   }, []);

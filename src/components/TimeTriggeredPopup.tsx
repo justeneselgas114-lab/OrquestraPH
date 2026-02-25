@@ -24,6 +24,19 @@ export const TimeTriggeredPopup: React.FC<TimeTriggeredPopupProps> = ({ isOpen, 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
+  // Disable scrolling when popup is open
+  React.useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -59,7 +72,7 @@ export const TimeTriggeredPopup: React.FC<TimeTriggeredPopupProps> = ({ isOpen, 
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4 sm:p-6"
             onClick={onClose}
           >
             {/* Popup Content */}
@@ -73,7 +86,7 @@ export const TimeTriggeredPopup: React.FC<TimeTriggeredPopupProps> = ({ isOpen, 
                 stiffness: 300,
                 duration: 0.4
               }}
-              className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto"
+              className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full max-w-[95vw] sm:max-w-[480px] max-h-[90vh] overflow-y-auto mx-4 sm:mx-0"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close Button */}
@@ -85,7 +98,7 @@ export const TimeTriggeredPopup: React.FC<TimeTriggeredPopupProps> = ({ isOpen, 
               </button>
 
               {/* Content */}
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 {!submitted ? (
                   <>
                     {/* Warning Header */}
@@ -132,7 +145,7 @@ export const TimeTriggeredPopup: React.FC<TimeTriggeredPopupProps> = ({ isOpen, 
                     </div>
 
                     {/* Form */}
-                    <form onSubmit={handleSubmit} className="space-y-4">
+                    <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
                       <div>
                         <label className="block text-sm font-medium text-slate-700 mb-1">
                           Full Name *
@@ -143,7 +156,7 @@ export const TimeTriggeredPopup: React.FC<TimeTriggeredPopupProps> = ({ isOpen, 
                           value={formData.name}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+                          className="w-full px-3 py-2 sm:py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-sm sm:text-base"
                           placeholder="Enter your full name"
                         />
                       </div>
@@ -158,7 +171,7 @@ export const TimeTriggeredPopup: React.FC<TimeTriggeredPopupProps> = ({ isOpen, 
                           value={formData.business}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+                          className="w-full px-3 py-2 sm:py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-sm sm:text-base"
                           placeholder="Your business name"
                         />
                       </div>
@@ -173,7 +186,7 @@ export const TimeTriggeredPopup: React.FC<TimeTriggeredPopupProps> = ({ isOpen, 
                           value={formData.email}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+                          className="w-full px-3 py-2 sm:py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-sm sm:text-base"
                           placeholder="your@email.com"
                         />
                       </div>
@@ -188,7 +201,7 @@ export const TimeTriggeredPopup: React.FC<TimeTriggeredPopupProps> = ({ isOpen, 
                           value={formData.phone}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+                          className="w-full px-3 py-2 sm:py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-sm sm:text-base"
                           placeholder="+63 XXX XXX XXXX"
                         />
                       </div>
@@ -196,12 +209,12 @@ export const TimeTriggeredPopup: React.FC<TimeTriggeredPopupProps> = ({ isOpen, 
                       <Button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 py-3 sm:py-4 text-sm sm:text-base"
                       >
                         {isSubmitting ? 'Securing Your Spot...' : 'Claim Partnership Opportunity'}
                       </Button>
 
-                      <p className="text-xs text-slate-500 text-center">
+                      <p className="text-xs text-slate-500 text-center mt-3 sm:mt-4">
                         No commitment required. We will contact you within 24 hours.
                       </p>
                     </form>
